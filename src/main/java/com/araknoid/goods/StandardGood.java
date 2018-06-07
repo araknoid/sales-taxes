@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class StandardGood {
+public class StandardGood implements Good {
 
     private final String description;
     private final BigDecimal price;
@@ -29,11 +29,12 @@ public class StandardGood {
         );
     }
 
-    /**
-     * Computes the taxes value for the good, rounded to the nearest five cents
-     *
-     * @return taxes of the good rounded to the nearest five cents
-     */
+    @Override
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    @Override
     public BigDecimal getTaxes() {
         BigDecimal taxValue = price.divide(new BigDecimal("100"))
                 .multiply(new BigDecimal("10"));
@@ -46,11 +47,7 @@ public class StandardGood {
                 .multiply(fiveCents);
     }
 
-    /**
-     * Computes the price of the good including the taxes value
-     *
-     * @return the price of the good, taxes included
-     */
+    @Override
     public BigDecimal getPriceWithTaxes() {
         return price.add(getTaxes());
     }
