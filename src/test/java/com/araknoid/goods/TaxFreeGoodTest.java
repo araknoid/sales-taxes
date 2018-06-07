@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TaxFreeGoodTest {
 
-    private Good taxFreeGood = TaxFreeGood.of("book", new BigDecimal("12.49"));
+    private Good taxFreeGood = TaxedGood.exempt("book", new BigDecimal("12.49"));
 
     @Test
     public void givenTaxFreeGood_whenComputingTaxes_thenTaxIsZero() {

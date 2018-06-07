@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class StandardGoodTest {
 
-    private Good standardGood = StandardGood.of("music CD", new BigDecimal("14.99"));
+    private Good standardGood = TaxedGood.standard("music CD", new BigDecimal("14.99"));
 
     @Test
     public void givenStandardGood_whenComputingTaxes_thenTaxValueIsReturned() {
