@@ -7,27 +7,29 @@ public class TaxFreeGood implements Good {
 
     private final String description;
     private final BigDecimal price;
+    private final TaxPolicy taxPolicy;
 
     public static TaxFreeGood of(String description, BigDecimal price) {
         return new TaxFreeGood(
                 Objects.requireNonNull(description),
-                Objects.requireNonNull(price)
-        );
+                Objects.requireNonNull(price),
+                TaxPolicy.EXEMPT);
     }
 
-    public TaxFreeGood(String description, BigDecimal price) {
+    public TaxFreeGood(String description, BigDecimal price, TaxPolicy taxPolicy) {
         this.description = description;
         this.price = price;
+        this.taxPolicy = taxPolicy;
     }
 
     @Override
     public BigDecimal getTaxes() {
-        return BigDecimal.ZERO;
+        return taxPolicy.applyTo(price);
     }
 
     @Override
     public BigDecimal getPriceWithTaxes() {
-        return price;
+        return price.add(getTaxes());
     }
 
     @Override

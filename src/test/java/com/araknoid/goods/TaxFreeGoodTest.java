@@ -14,7 +14,7 @@ public class TaxFreeGoodTest {
     public void givenTaxFreeGood_whenComputingTaxes_thenTaxIsZero() {
         BigDecimal taxes = taxFreeGood.getTaxes();
 
-        assertEquals(BigDecimal.ZERO, taxes);
+        assertEquals(new BigDecimal("0.00"), taxes);
     }
 
     @Test
