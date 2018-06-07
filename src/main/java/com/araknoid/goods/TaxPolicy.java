@@ -3,9 +3,12 @@ package com.araknoid.goods;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public enum TaxPolicy {
+/**
+ * Tax policy that can be applied to a {@link Good}
+ */
+enum TaxPolicy {
 
-    STANDARD(new BigDecimal("10")), EXEMPT(BigDecimal.ZERO);
+    STANDARD(new BigDecimal("10")), EXEMPT(BigDecimal.ZERO), IMPORTED(new BigDecimal("5"));
 
     public static final BigDecimal HUNDRED = new BigDecimal("100");
     public static final BigDecimal FIVE_CENTS = new BigDecimal("0.05");
