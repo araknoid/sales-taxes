@@ -83,4 +83,23 @@ public class AmountTest {
 
         assertEquals("11.10", amount.print());
     }
+
+    @Test
+    public void givenTwoAmount_whenAddingOneToAnother_thenReturnAmountRepresentingTheSum() {
+        Amount amount1 = Amount.of(new BigDecimal("19.9"));
+        Amount amount2 = Amount.of(new BigDecimal("21.1"));
+
+        Amount sum = amount1.add(amount2);
+
+        assertEquals(Amount.of(new BigDecimal("41.0")), sum);
+    }
+
+    @Test
+    public void whenAddingNullToAmount_thenSameAmountIsReturned() {
+        Amount amount = Amount.of(new BigDecimal("44.22"));
+
+        Amount sum = amount.add(null);
+
+        assertSame(amount, sum);
+    }
 }

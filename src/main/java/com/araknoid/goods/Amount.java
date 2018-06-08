@@ -59,4 +59,13 @@ public class Amount {
         DecimalFormat df = new DecimalFormat("#0.00");
         return df.format(amountValue.stripTrailingZeros());
     }
+
+    public Amount add(Amount addend) {
+
+        if(addend == null) {
+            return this;
+        }
+
+        return new Amount(amountValue.add(addend.asBigDecimal()));
+    }
 }

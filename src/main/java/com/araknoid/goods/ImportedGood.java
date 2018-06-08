@@ -21,7 +21,7 @@ public class ImportedGood implements Good {
     @Override
     public Amount getTaxes() {
         Amount additionalTaxes = TaxPolicy.IMPORTED.applyTo(good.getPrice());
-        return Amount.of(good.getTaxes().asBigDecimal().add(additionalTaxes.asBigDecimal()));
+        return good.getTaxes().add(additionalTaxes);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class TaxedGood implements Good {
 
     @Override
     public Amount getPriceWithTaxes() {
-        return Amount.of(price.asBigDecimal().add(getTaxes().asBigDecimal()));
+        return price.add(getTaxes());
     }
 
     @Override
