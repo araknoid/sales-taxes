@@ -1,5 +1,7 @@
 package com.araknoid.goods;
 
+import com.araknoid.numbers.Amount;
+
 public interface Good {
 
     public Amount getPrice();

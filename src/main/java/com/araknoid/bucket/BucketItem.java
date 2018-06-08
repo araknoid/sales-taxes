@@ -1,7 +1,8 @@
 package com.araknoid.bucket;
 
-import com.araknoid.goods.Amount;
+import com.araknoid.numbers.Amount;
 import com.araknoid.goods.Good;
+import com.araknoid.numbers.Quantity;
 
 import java.util.Objects;
 

@@ -1,8 +1,8 @@
 package com.araknoid.bucket;
 
-import com.araknoid.goods.Amount;
+import com.araknoid.numbers.Amount;
 import com.araknoid.goods.ImportedGood;
-import com.araknoid.goods.TaxedGood;
+import com.araknoid.numbers.Quantity;
 import org.junit.Test;
 
 import java.math.BigDecimal;

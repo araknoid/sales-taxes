@@ -1,5 +1,6 @@
-package com.araknoid.bucket;
+package com.araknoid.numbers;
 
+import com.araknoid.numbers.Quantity;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

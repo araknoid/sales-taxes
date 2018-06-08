@@ -1,6 +1,6 @@
-package com.araknoid.bucket;
+package com.araknoid.numbers;
 
-class Quantity {
+public class Quantity {
 
     private final int quantityValue;
 

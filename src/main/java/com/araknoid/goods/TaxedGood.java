@@ -1,5 +1,7 @@
 package com.araknoid.goods;
 
+import com.araknoid.numbers.Amount;
+
 import java.util.Objects;
 
 public class TaxedGood implements Good {

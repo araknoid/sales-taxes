@@ -1,5 +1,7 @@
 package com.araknoid.goods;
 
+import com.araknoid.numbers.Amount;
+
 import java.util.Objects;
 
 /**
@@ -26,7 +28,7 @@ public class ImportedGood implements Good {
 
     @Override
     public Amount getPriceWithTaxes() {
-        return Amount.of(good.getPrice().asBigDecimal().add(getTaxes().asBigDecimal()));
+        return good.getPrice().add(getTaxes());
     }
 
     @Override

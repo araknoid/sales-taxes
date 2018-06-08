@@ -1,4 +1,4 @@
-package com.araknoid.goods;
+package com.araknoid.numbers;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -31,7 +31,7 @@ public class Amount {
      *
      * @return the value of the amount as {@link BigDecimal}
      */
-    BigDecimal asBigDecimal() {
+    public BigDecimal asBigDecimal() {
         return amountValue;
     }
 

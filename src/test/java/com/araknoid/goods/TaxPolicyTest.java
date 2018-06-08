@@ -1,5 +1,6 @@
 package com.araknoid.goods;
 
+import com.araknoid.numbers.Amount;
 import org.junit.Test;
 
 import java.math.BigDecimal;

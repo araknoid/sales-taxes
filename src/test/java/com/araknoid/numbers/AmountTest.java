@@ -1,4 +1,4 @@
-package com.araknoid.goods;
+package com.araknoid.numbers;
 
 import org.junit.Test;
 
