@@ -8,18 +8,18 @@ import static org.junit.Assert.assertEquals;
 
 public class TaxFreeGoodTest {
 
-    private Good taxFreeGood = TaxedGood.exempt("book", new BigDecimal("12.49"));
+    private Good taxFreeGood = TaxedGood.exempt("book", Amount.of(new BigDecimal("12.49")));
 
     @Test
     public void givenTaxFreeGood_whenComputingTaxes_thenTaxIsZero() {
-        BigDecimal taxes = taxFreeGood.getTaxes();
+        Amount taxes = taxFreeGood.getTaxes();
 
-        assertEquals(new BigDecimal("0.00"), taxes);
+        assertEquals(Amount.of(new BigDecimal("0.00")), taxes);
     }
 
     @Test
     public void givenStandardGood_whenComputingPriceWithTaxes_thenPriceWithTaxesIsReturned() {
-        BigDecimal priceWithTaxes = taxFreeGood.getPriceWithTaxes();
+        Amount priceWithTaxes = taxFreeGood.getPriceWithTaxes();
 
         assertEquals(taxFreeGood.getPrice(), priceWithTaxes);
     }

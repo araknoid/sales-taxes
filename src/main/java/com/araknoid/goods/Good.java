@@ -1,7 +1,5 @@
 package com.araknoid.goods;
 
-import java.math.BigDecimal;
-
 public interface Good {
 
     /**
@@ -9,19 +7,19 @@ public interface Good {
      *
      * @return the price standard the good
      */
-    public BigDecimal getPrice();
+    public Amount getPrice();
 
     /**
      * Computes the taxes value for the good
      *
      * @return taxes standard the good
      */
-    public BigDecimal getTaxes();
+    public Amount getTaxes();
 
     /**
      * Computes the price standard the good including the taxes value
      *
      * @return the price standard the good, taxes included
      */
-    public BigDecimal getPriceWithTaxes();
+    public Amount getPriceWithTaxes();
 }

@@ -8,19 +8,26 @@ import static org.junit.Assert.assertEquals;
 
 public class TaxPolicyTest {
 
-    private BigDecimal price = new BigDecimal("16.99");
+    private Amount price = Amount.of(new BigDecimal("16.99"));
 
     @Test
     public void givenPrice_whenComputingStandardTax_thenTaxValueIsCorrect() {
-        BigDecimal taxes = TaxPolicy.STANDARD.applyTo(price);
+        Amount taxes = TaxPolicy.STANDARD.applyTo(price);
 
-        assertEquals(new BigDecimal("1.70"), taxes);
+        assertEquals(Amount.of(new BigDecimal("1.70")), taxes);
     }
 
     @Test
     public void givenPrice_whenComputingTaxFreeTaxes_thenZeroIsReturned() {
-        BigDecimal taxes = TaxPolicy.EXEMPT.applyTo(price);
+        Amount taxes = TaxPolicy.EXEMPT.applyTo(price);
 
-        assertEquals(new BigDecimal("0.00"), taxes);
+        assertEquals(Amount.of(new BigDecimal("0.00")), taxes);
+    }
+
+    @Test
+    public void givenPrice_whenComputingImportedTax_thenTaxValueIsCorrect() {
+        Amount taxes = TaxPolicy.IMPORTED.applyTo(price);
+
+        assertEquals(Amount.of(new BigDecimal("0.85")), taxes);
     }
 }

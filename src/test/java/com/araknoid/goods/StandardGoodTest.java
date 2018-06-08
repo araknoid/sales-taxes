@@ -8,19 +8,19 @@ import static org.junit.Assert.assertEquals;
 
 public class StandardGoodTest {
 
-    private Good standardGood = TaxedGood.standard("music CD", new BigDecimal("14.99"));
+    private Good standardGood = TaxedGood.standard("music CD", Amount.of(new BigDecimal("14.99")));
 
     @Test
     public void givenStandardGood_whenComputingTaxes_thenTaxValueIsReturned() {
-        BigDecimal taxes = standardGood.getTaxes();
+        Amount taxes = standardGood.getTaxes();
 
-        assertEquals(new BigDecimal("1.50"), taxes);
+        assertEquals(Amount.of(new BigDecimal("1.50")), taxes);
     }
 
     @Test
     public void givenStandardGood_whenComputingPriceWithTaxes_thenPriceWithTaxesIsReturned() {
-        BigDecimal priceWithTaxes = standardGood.getPriceWithTaxes();
+        Amount priceWithTaxes = standardGood.getPriceWithTaxes();
 
-        assertEquals(new BigDecimal("16.49"), priceWithTaxes);
+        assertEquals(Amount.of(new BigDecimal("16.49")), priceWithTaxes);
     }
 }

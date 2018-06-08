@@ -1,15 +1,14 @@
 package com.araknoid.goods;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class TaxedGood implements Good {
 
     private final String description;
-    private final BigDecimal price;
+    private final Amount price;
     private final TaxPolicy taxPolicy;
 
-    private TaxedGood(String description, BigDecimal price, TaxPolicy taxPolicy) {
+    private TaxedGood(String description, Amount price, TaxPolicy taxPolicy) {
         this.description = description;
         this.price = price;
         this.taxPolicy = taxPolicy;
@@ -23,7 +22,7 @@ public class TaxedGood implements Good {
      * @return instance of a standard good
      * @throws NullPointerException if <code>description</code> aor <code>price</code> is null
      */
-    public static TaxedGood standard(String description, BigDecimal price) {
+    public static TaxedGood standard(String description, Amount price) {
         return new TaxedGood(
                 Objects.requireNonNull(description),
                 Objects.requireNonNull(price),
@@ -38,7 +37,7 @@ public class TaxedGood implements Good {
      * @return instance of a tax free good
      * @throws NullPointerException if <code>description</code> aor <code>price</code> is null
      */
-    public static TaxedGood exempt(String description, BigDecimal price) {
+    public static TaxedGood exempt(String description, Amount price) {
         return new TaxedGood(
                 Objects.requireNonNull(description),
                 Objects.requireNonNull(price),
@@ -46,17 +45,17 @@ public class TaxedGood implements Good {
     }
 
     @Override
-    public BigDecimal getPrice() {
+    public Amount getPrice() {
         return price;
     }
 
     @Override
-    public BigDecimal getTaxes() {
+    public Amount getTaxes() {
         return taxPolicy.applyTo(price);
     }
 
     @Override
-    public BigDecimal getPriceWithTaxes() {
-        return price.add(getTaxes());
+    public Amount getPriceWithTaxes() {
+        return Amount.of(price.asBigDecimal().add(getTaxes().asBigDecimal()));
     }
 }

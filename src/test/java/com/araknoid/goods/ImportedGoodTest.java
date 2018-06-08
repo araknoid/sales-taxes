@@ -8,27 +8,27 @@ import static org.junit.Assert.assertEquals;
 
 public class ImportedGoodTest {
 
-    private Good bottleOfPerfume = TaxedGood.standard("bottle of perfume", new BigDecimal("47.50"));
+    private Good bottleOfPerfume = TaxedGood.standard("bottle of perfume", Amount.of(new BigDecimal("47.50")));
 
     @Test
     public void givenStandardGood_whenImported_thenTaxesAreFivePercentHigher() {
         ImportedGood importedBottleOfPerfume = new ImportedGood(bottleOfPerfume);
 
-        assertEquals(new BigDecimal("7.15"), importedBottleOfPerfume.getTaxes());
+        assertEquals(Amount.of(new BigDecimal("7.15")), importedBottleOfPerfume.getTaxes());
     }
 
     @Test
     public void givenTaxFreeGood_whenImported_thenTaxValueIsFivePercentHigher() {
-        Good boxOfChocolates = TaxedGood.exempt("box of chocolates", new BigDecimal("10.00"));
+        Good boxOfChocolates = TaxedGood.exempt("box of chocolates", Amount.of(new BigDecimal("10.00")));
 
         ImportedGood importedBoxOfChocolates = new ImportedGood(boxOfChocolates);
 
-        assertEquals(new BigDecimal("0.50"), importedBoxOfChocolates.getTaxes());
+        assertEquals(Amount.of(new BigDecimal("0.50")), importedBoxOfChocolates.getTaxes());
     }
 
     @Test
     public void givenTaxedFood_whenImported_thenPriceIsEqual() {
-        BigDecimal chocolateBarPrice = new BigDecimal("0.85");
+        Amount chocolateBarPrice = Amount.of(new BigDecimal("0.85"));
         Good chocolateBar = TaxedGood.standard("chocolate bar", chocolateBarPrice);
 
         ImportedGood importedChocolateBar = new ImportedGood(chocolateBar);
@@ -40,6 +40,6 @@ public class ImportedGoodTest {
     public void givenStandardGood_whenImported_thenPriceWithTaxesIsFivePercentHigher() {
         ImportedGood importedBottleOfPerfume = new ImportedGood(bottleOfPerfume);
 
-        assertEquals(new BigDecimal("54.65"), importedBottleOfPerfume.getPriceWithTaxes());
+        assertEquals(Amount.of(new BigDecimal("54.65")), importedBottleOfPerfume.getPriceWithTaxes());
     }
 }

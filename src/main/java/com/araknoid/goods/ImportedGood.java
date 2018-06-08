@@ -1,6 +1,5 @@
 package com.araknoid.goods;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -15,17 +14,18 @@ public class ImportedGood implements Good {
     }
 
     @Override
-    public BigDecimal getPrice() {
+    public Amount getPrice() {
         return good.getPrice();
     }
 
     @Override
-    public BigDecimal getTaxes() {
-        return good.getTaxes().add(TaxPolicy.IMPORTED.applyTo(good.getPrice()));
+    public Amount getTaxes() {
+        Amount additionalTaxes = TaxPolicy.IMPORTED.applyTo(good.getPrice());
+        return Amount.of(good.getTaxes().asBigDecimal().add(additionalTaxes.asBigDecimal()));
     }
 
     @Override
-    public BigDecimal getPriceWithTaxes() {
-        return good.getPrice().add(getTaxes());
+    public Amount getPriceWithTaxes() {
+        return Amount.of(good.getPrice().asBigDecimal().add(getTaxes().asBigDecimal()));
     }
 }
