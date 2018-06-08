@@ -5,11 +5,10 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-import static java.math.BigDecimal.ZERO;
-
 public class Amount {
 
     public static final BigDecimal FIVE_CENTS = new BigDecimal("0.05");
+    public static final Amount ZERO = new Amount(new BigDecimal("0.00"));
 
     private final BigDecimal amountValue;
 
@@ -20,7 +19,7 @@ public class Amount {
     public static Amount of(BigDecimal amountValue) {
         Objects.requireNonNull(amountValue);
 
-        if (amountValue.compareTo(ZERO) < 0) {
+        if (amountValue.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Cannot create an amount with a negative value");
         }
 

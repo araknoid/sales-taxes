@@ -11,7 +11,7 @@ public interface Good {
     public String getGoodDescription();
 
     /**
-     * Prints the {@link Good} in the form of a formatted {@link String},
+     * Prints the {@link Good} as a formatted {@link String},
      * that will contain the description and the price with taxes of the good
      *
      * @return the {@link String} representing the {@link Good}

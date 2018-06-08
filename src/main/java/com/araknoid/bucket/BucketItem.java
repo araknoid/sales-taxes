@@ -1,5 +1,6 @@
 package com.araknoid.bucket;
 
+import com.araknoid.goods.Amount;
 import com.araknoid.goods.Good;
 
 import java.util.Objects;
@@ -23,5 +24,13 @@ public class BucketItem {
 
     public String print() {
         return quantity.print() + " " + good.print();
+    }
+
+    Amount getPriceWithTaxes() {
+        return good.getPriceWithTaxes();
+    }
+
+    Amount getTaxes() {
+        return good.getTaxes();
     }
 }
