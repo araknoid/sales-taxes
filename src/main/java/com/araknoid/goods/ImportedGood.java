@@ -28,4 +28,9 @@ public class ImportedGood implements Good {
     public Amount getPriceWithTaxes() {
         return Amount.of(good.getPrice().asBigDecimal().add(getTaxes().asBigDecimal()));
     }
+
+    @Override
+    public String getGoodDescription() {
+        return "imported " + good.getGoodDescription();
+    }
 }

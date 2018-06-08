@@ -2,6 +2,7 @@ package com.araknoid.goods;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 import static java.math.BigDecimal.ZERO;
@@ -52,5 +53,10 @@ public class Amount {
 
     public Amount roundToNearestFiveCents() {
         return new Amount(amountValue.divide(FIVE_CENTS, 0, RoundingMode.UP).multiply(FIVE_CENTS));
+    }
+
+    public String print() {
+        DecimalFormat df = new DecimalFormat("#0.00");
+        return df.format(amountValue.stripTrailingZeros());
     }
 }

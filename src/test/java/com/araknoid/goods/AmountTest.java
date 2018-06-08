@@ -69,4 +69,18 @@ public class AmountTest {
 
         assertEquals(Amount.of(new BigDecimal("16.95")), roundedAmount);
     }
+
+    @Test
+    public void whenPrintingAmount_thenOutputIsFormattedWithTwoDecimals() {
+        Amount amount = Amount.of(new BigDecimal("16.95000"));
+
+        assertEquals("16.95", amount.print());
+    }
+
+    @Test
+    public void whenPrintingAmount_thenOutputIsFormattedWithTwoDecimalsWithZeroPadding() {
+        Amount amount = Amount.of(new BigDecimal("11.1"));
+
+        assertEquals("11.10", amount.print());
+    }
 }

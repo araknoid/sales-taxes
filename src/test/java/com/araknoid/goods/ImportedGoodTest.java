@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class ImportedGoodTest {
 
     private Good bottleOfPerfume = TaxedGood.standard("bottle of perfume", Amount.of(new BigDecimal("47.50")));
+    private Good chocolateBar = TaxedGood.exempt("chocolate bar", Amount.of(new BigDecimal("0.85")));
 
     @Test
     public void givenStandardGood_whenImported_thenTaxesAreFivePercentHigher() {
@@ -28,12 +29,9 @@ public class ImportedGoodTest {
 
     @Test
     public void givenTaxedFood_whenImported_thenPriceIsEqual() {
-        Amount chocolateBarPrice = Amount.of(new BigDecimal("0.85"));
-        Good chocolateBar = TaxedGood.standard("chocolate bar", chocolateBarPrice);
-
         ImportedGood importedChocolateBar = new ImportedGood(chocolateBar);
 
-        assertEquals(chocolateBarPrice, importedChocolateBar.getPrice());
+        assertEquals(chocolateBar.getPrice(), importedChocolateBar.getPrice());
     }
 
     @Test
@@ -41,5 +39,12 @@ public class ImportedGoodTest {
         ImportedGood importedBottleOfPerfume = new ImportedGood(bottleOfPerfume);
 
         assertEquals(Amount.of(new BigDecimal("54.65")), importedBottleOfPerfume.getPriceWithTaxes());
+    }
+
+    @Test
+    public void whenPrintingImportedGood_thenImportedGoodIsPrintedCorrectly() {
+        ImportedGood importedChocolateBar = new ImportedGood(chocolateBar);
+
+        assertEquals("imported chocolate bar: 0.90", importedChocolateBar.print());
     }
 }

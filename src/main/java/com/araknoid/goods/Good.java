@@ -2,24 +2,22 @@ package com.araknoid.goods;
 
 public interface Good {
 
-    /**
-     * Extract the price from the good
-     *
-     * @return the price standard the good
-     */
     public Amount getPrice();
 
-    /**
-     * Computes the taxes value for the good
-     *
-     * @return taxes standard the good
-     */
     public Amount getTaxes();
 
-    /**
-     * Computes the price standard the good including the taxes value
-     *
-     * @return the price standard the good, taxes included
-     */
     public Amount getPriceWithTaxes();
+
+    public String getGoodDescription();
+
+    /**
+     * Prints the {@link Good} in the form of a formatted {@link String},
+     * that will contain the description and the price with taxes of the good
+     *
+     * @return the {@link String} representing the {@link Good}
+     */
+    default String print() {
+        return String.format("%s: %s", getGoodDescription(), getPriceWithTaxes().print());
+    }
+
 }
