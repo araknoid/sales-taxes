@@ -1,7 +1,6 @@
 package com.araknoid.bucket;
 
 import com.araknoid.numbers.Amount;
-import com.araknoid.numbers.operations.Multiplication;
 import com.araknoid.print.Printable;
 
 import java.util.ArrayList;
@@ -44,27 +43,29 @@ public class Bucket implements Printable {
 
     @Override
     public String print() {
-        String bucketListReceipt = bucketList.stream()
-                .map(BucketItem::print)
-                .collect(Collectors.joining("\n"));
+        String bucketListReceipt = getBucketItemListPrinted();
 
-        Function<BucketItem, Multiplication> itemTotalPriceWithTaxes = item -> Multiplication.of(item.getPriceWithTaxes(), item.getQuantity());
-        Amount bucketTotalPriceWithTaxes = computeTotalFor(itemTotalPriceWithTaxes);
+        Amount bucketTotalPriceWithTaxes = computeTotalFor(BucketItem::getTotalItemPriceWithTaxes);
 
-        Function<BucketItem, Multiplication> itemTotalTaxes = item -> Multiplication.of(item.getTaxes(), item.getQuantity());
-        Amount bucketTotalTaxes = computeTotalFor(itemTotalTaxes);
+        Amount bucketTotalTaxes = computeTotalFor(BucketItem::getTotalItemTaxes);
 
-        String receipt = bucketListReceipt + "\n"
-                + "Sales Taxes: " + bucketTotalTaxes.print() + "\n"
-                + "Total: " + bucketTotalPriceWithTaxes.print();
-
-        return receipt;
+        return getReceipt(bucketListReceipt, bucketTotalPriceWithTaxes, bucketTotalTaxes);
     }
 
-    private Amount computeTotalFor(Function<BucketItem, Multiplication> mappingFunction) {
+    private String getBucketItemListPrinted() {
+        return bucketList.stream()
+                .map(BucketItem::print)
+                .collect(Collectors.joining("\n"));
+    }
+
+    private String getReceipt(String bucketListReceipt, Amount bucketTotalPriceWithTaxes, Amount bucketTotalTaxes) {
+        return String.format("%s\n" + "Sales Taxes: %s\n" + "Total: %s",
+                bucketListReceipt, bucketTotalTaxes.print(), bucketTotalPriceWithTaxes.print());
+    }
+
+    private Amount computeTotalFor(Function<BucketItem, Amount> mappingFunction) {
         return bucketList.stream()
                 .map(mappingFunction)
-                .map(Multiplication::asAmount)
                 .reduce(Amount.ZERO, Amount::add);
     }
 }

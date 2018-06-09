@@ -9,9 +9,8 @@ import java.math.BigDecimal;
  */
 public class Quantity implements Printable {
 
-    private final int quantityValue;
-
     public static final Quantity ONE = of(1);
+    private final int quantityValue;
 
     private Quantity(int quantityValue) {
         this.quantityValue = quantityValue;

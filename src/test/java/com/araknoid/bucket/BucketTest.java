@@ -1,7 +1,7 @@
 package com.araknoid.bucket;
 
-import com.araknoid.numbers.Amount;
 import com.araknoid.goods.ImportedGood;
+import com.araknoid.numbers.Amount;
 import com.araknoid.numbers.Quantity;
 import org.junit.Test;
 
