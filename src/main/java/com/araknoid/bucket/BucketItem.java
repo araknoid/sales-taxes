@@ -34,4 +34,8 @@ public class BucketItem {
     Amount getTaxes() {
         return good.getTaxes();
     }
+
+    Quantity getQuantity() {
+        return quantity;
+    }
 }

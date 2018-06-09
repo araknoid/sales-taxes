@@ -1,6 +1,7 @@
 package com.araknoid.bucket;
 
 import com.araknoid.numbers.Amount;
+import com.araknoid.numbers.operations.Multiplication;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,11 +45,13 @@ public class Bucket {
                 .collect(Collectors.joining("\n"));
 
         Amount totalPriceWithTaxes = bucketList.stream()
-                .map(BucketItem::getPriceWithTaxes)
+                .map(item -> Multiplication.of(item.getPriceWithTaxes(), item.getQuantity()))
+                .map(Multiplication::asAmount)
                 .reduce(Amount.ZERO, Amount::add);
 
         Amount totalTaxes = bucketList.stream()
-                .map(BucketItem::getTaxes)
+                .map(item -> Multiplication.of(item.getTaxes(), item.getQuantity()))
+                .map(Multiplication::asAmount)
                 .reduce(Amount.ZERO, Amount::add);
 
         String receipt = bucketListReceipt + "\n"

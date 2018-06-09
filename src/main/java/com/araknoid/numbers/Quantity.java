@@ -1,5 +1,7 @@
 package com.araknoid.numbers;
 
+import java.math.BigDecimal;
+
 public class Quantity {
 
     private final int quantityValue;
@@ -17,5 +19,9 @@ public class Quantity {
 
     public String print() {
         return String.valueOf(quantityValue);
+    }
+
+    public BigDecimal asBigDecimal() {
+        return new BigDecimal(quantityValue);
     }
 }

@@ -100,4 +100,24 @@ public class BucketTest {
                 "Sales Taxes: 6.70\n" +
                 "Total: 74.68", receipt);
     }
+
+    @Test
+    public void givenBucketWithItemWithQuantitiesGreaterThaOne_whenPrintingReceipt_thenOutputReceiptIsCorrect() {
+        List<BucketItem> bucketList = Arrays.asList(
+                BucketItem.of(new Quantity(2), new ImportedGood(standard("bottle of perfume", Amount.of(new BigDecimal("27.99"))))),
+                BucketItem.of(new Quantity(2), standard("bottle of perfume", Amount.of(new BigDecimal("18.99")))),
+                BucketItem.of(Quantity.ONE, exempt("packet of headache pills", Amount.of(new BigDecimal("9.75")))),
+                BucketItem.of(new Quantity(3), new ImportedGood(exempt("box of chocolates", Amount.of(new BigDecimal("11.25")))))
+        );
+        Bucket bucket = Bucket.of(bucketList);
+
+        String receipt = bucket.printReceipt();
+
+        assertEquals("2 imported bottle of perfume: 32.19\n" +
+                "2 bottle of perfume: 20.89\n" +
+                "1 packet of headache pills: 9.75\n" +
+                "3 imported box of chocolates: 11.85\n" +
+                "Sales Taxes: 14.00\n" +
+                "Total: 151.46", receipt);
+    }
 }
