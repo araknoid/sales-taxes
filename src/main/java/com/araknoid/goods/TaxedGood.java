@@ -22,7 +22,7 @@ public class TaxedGood implements Good {
      * @param description name of the standard good
      * @param price       price of the standard good
      * @return instance of a standard good
-     * @throws NullPointerException if <code>description</code> aor <code>price</code> is null
+     * @throws NullPointerException if <code>description</code> or <code>price</code> is null
      */
     public static TaxedGood standard(String description, Amount price) {
         return new TaxedGood(
@@ -37,7 +37,7 @@ public class TaxedGood implements Good {
      * @param description name of the tax free good
      * @param price       price of the tax free good
      * @return instance of a tax free good
-     * @throws NullPointerException if <code>description</code> aor <code>price</code> is null
+     * @throws NullPointerException if <code>description</code> or <code>price</code> is null
      */
     public static TaxedGood exempt(String description, Amount price) {
         return new TaxedGood(

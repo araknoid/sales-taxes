@@ -16,6 +16,14 @@ public class Amount {
         this.amountValue = amountValue;
     }
 
+    /**
+     * Build an instance of a positive only {@link Amount} from the given <code>amountValue</code>
+     *
+     * @param amountValue value that the quantity will represent
+     * @return {@link Amount} representing the <code>amountValue</code>
+     * @throws NullPointerException     if the <code>amountValue</code> is null
+     * @throws IllegalArgumentException if the <code>amountValue</code> is negative
+     */
     public static Amount of(BigDecimal amountValue) {
         Objects.requireNonNull(amountValue);
 
@@ -50,6 +58,22 @@ public class Amount {
         return amountValue.hashCode();
     }
 
+    /**
+     * Rounds the {@link Amount} to the nearest 5 cents
+     * These are the rounding applied:
+     * <ul>
+     * <li>amount with 0 cents, no rounding is applied</li>
+     * <li>amount with 1-5 cents, rounded to 5 cents</li>
+     * <li>amount with 6-9 cents, rounded to the next 10 cents</li>
+     * </ul>
+     * Examples:
+     * <ul>
+     * <li>11.03 will be rounded to 11.05</li>
+     * <li>9.99 will be rounded to 10.00</li>
+     * </ul>
+     *
+     * @return rounded {@link Amount} to the nearest 5 cents
+     */
     public Amount roundToNearestFiveCents() {
         return new Amount(amountValue.divide(FIVE_CENTS, 0, RoundingMode.UP).multiply(FIVE_CENTS));
     }
@@ -59,9 +83,16 @@ public class Amount {
         return df.format(amountValue.stripTrailingZeros());
     }
 
+    /**
+     * Add the addend {@link Amount}
+     * If the <code>addend</code> is <code>null</code>, it will return the same amount
+     *
+     * @param addend {@link Amount} to be added
+     * @return a new instance of {@link Amount} representing the addition of the <code>addend</code> to the amount
+     */
     public Amount add(Amount addend) {
 
-        if(addend == null) {
+        if (addend == null) {
             return this;
         }
 

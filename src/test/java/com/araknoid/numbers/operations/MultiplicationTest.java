@@ -12,7 +12,7 @@ public class MultiplicationTest {
 
     @Test
     public void givenAmountAndQuantity_whenMultiplied_thenReturnedAmountRepresentingTheMultiplication() {
-        Quantity quantity = new Quantity(5);
+        Quantity quantity = Quantity.of(5);
         Amount amount = Amount.of(new BigDecimal("10.05"));
 
         Multiplication multiplication = Multiplication.of(amount, quantity);

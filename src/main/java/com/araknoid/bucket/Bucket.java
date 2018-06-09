@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Bucket {
+    
     private final List<BucketItem> bucketList;
 
     private Bucket(List<BucketItem> bucketList) {
@@ -44,20 +46,23 @@ public class Bucket {
                 .map(BucketItem::print)
                 .collect(Collectors.joining("\n"));
 
-        Amount totalPriceWithTaxes = bucketList.stream()
-                .map(item -> Multiplication.of(item.getPriceWithTaxes(), item.getQuantity()))
-                .map(Multiplication::asAmount)
-                .reduce(Amount.ZERO, Amount::add);
+        Function<BucketItem, Multiplication> itemTotalPriceWithTaxes = item -> Multiplication.of(item.getPriceWithTaxes(), item.getQuantity());
+        Amount bucketTotalPriceWithTaxes = computeTotalFor(itemTotalPriceWithTaxes);
 
-        Amount totalTaxes = bucketList.stream()
-                .map(item -> Multiplication.of(item.getTaxes(), item.getQuantity()))
-                .map(Multiplication::asAmount)
-                .reduce(Amount.ZERO, Amount::add);
+        Function<BucketItem, Multiplication> itemTotalTaxes = item -> Multiplication.of(item.getTaxes(), item.getQuantity());
+        Amount bucketTotalTaxes = computeTotalFor(itemTotalTaxes);
 
         String receipt = bucketListReceipt + "\n"
-                + "Sales Taxes: " + totalTaxes.print() + "\n"
-                + "Total: " + totalPriceWithTaxes.print();
+                + "Sales Taxes: " + bucketTotalTaxes.print() + "\n"
+                + "Total: " + bucketTotalPriceWithTaxes.print();
 
         return receipt;
+    }
+
+    private Amount computeTotalFor(Function<BucketItem, Multiplication> mappingFunction) {
+        return bucketList.stream()
+                .map(mappingFunction)
+                .map(Multiplication::asAmount)
+                .reduce(Amount.ZERO, Amount::add);
     }
 }

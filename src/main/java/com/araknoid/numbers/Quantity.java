@@ -6,15 +6,24 @@ public class Quantity {
 
     private final int quantityValue;
 
-    public static final Quantity ONE = new Quantity(1);
+    public static final Quantity ONE = of(1);
 
-    public Quantity(int quantityValue) {
+    private Quantity(int quantityValue) {
+        this.quantityValue = quantityValue;
+    }
+
+    /**
+     *
+     * @param quantityValue
+     * @return
+     */
+    public static Quantity of(int quantityValue) {
 
         if(quantityValue < 0) {
             throw new IllegalArgumentException("Cannot create a quantity with a negative value");
         }
 
-        this.quantityValue = quantityValue;
+        return new Quantity(quantityValue);
     }
 
     public String print() {

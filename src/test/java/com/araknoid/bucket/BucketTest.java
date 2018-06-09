@@ -104,10 +104,10 @@ public class BucketTest {
     @Test
     public void givenBucketWithItemWithQuantitiesGreaterThaOne_whenPrintingReceipt_thenOutputReceiptIsCorrect() {
         List<BucketItem> bucketList = Arrays.asList(
-                BucketItem.of(new Quantity(2), new ImportedGood(standard("bottle of perfume", Amount.of(new BigDecimal("27.99"))))),
-                BucketItem.of(new Quantity(2), standard("bottle of perfume", Amount.of(new BigDecimal("18.99")))),
+                BucketItem.of(Quantity.of(2), new ImportedGood(standard("bottle of perfume", Amount.of(new BigDecimal("27.99"))))),
+                BucketItem.of(Quantity.of(2), standard("bottle of perfume", Amount.of(new BigDecimal("18.99")))),
                 BucketItem.of(Quantity.ONE, exempt("packet of headache pills", Amount.of(new BigDecimal("9.75")))),
-                BucketItem.of(new Quantity(3), new ImportedGood(exempt("box of chocolates", Amount.of(new BigDecimal("11.25")))))
+                BucketItem.of(Quantity.of(3), new ImportedGood(exempt("box of chocolates", Amount.of(new BigDecimal("11.25")))))
         );
         Bucket bucket = Bucket.of(bucketList);
 

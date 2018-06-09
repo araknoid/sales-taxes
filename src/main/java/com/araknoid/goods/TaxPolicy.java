@@ -4,9 +4,6 @@ import com.araknoid.numbers.Amount;
 
 import java.math.BigDecimal;
 
-/**
- * Tax policy that can be applied to a {@link Good}
- */
 enum TaxPolicy {
 
     STANDARD(new BigDecimal("10")), EXEMPT(BigDecimal.ZERO), IMPORTED(new BigDecimal("5"));
