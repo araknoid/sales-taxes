@@ -55,7 +55,7 @@ public class BucketTest {
         );
         Bucket bucket = Bucket.of(bucketList);
 
-        String receipt = bucket.printReceipt();
+        String receipt = bucket.print();
 
         assertEquals("1 book: 12.49\n" +
                 "1 music CD: 16.49\n" +
@@ -72,7 +72,7 @@ public class BucketTest {
         );
         Bucket bucket = Bucket.of(bucketList);
 
-        String receipt = bucket.printReceipt();
+        String receipt = bucket.print();
 
         assertEquals("1 imported box of chocolates: 10.50\n" +
                 "1 imported bottle of perfume: 54.65\n" +
@@ -91,7 +91,7 @@ public class BucketTest {
         );
         Bucket bucket = Bucket.of(bucketList);
 
-        String receipt = bucket.printReceipt();
+        String receipt = bucket.print();
 
         assertEquals("1 imported bottle of perfume: 32.19\n" +
                 "1 bottle of perfume: 20.89\n" +
@@ -111,7 +111,7 @@ public class BucketTest {
         );
         Bucket bucket = Bucket.of(bucketList);
 
-        String receipt = bucket.printReceipt();
+        String receipt = bucket.print();
 
         assertEquals("2 imported bottle of perfume: 32.19\n" +
                 "2 bottle of perfume: 20.89\n" +

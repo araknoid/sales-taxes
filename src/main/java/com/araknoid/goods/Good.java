@@ -1,8 +1,9 @@
 package com.araknoid.goods;
 
 import com.araknoid.numbers.Amount;
+import com.araknoid.print.Printable;
 
-public interface Good {
+public interface Good extends Printable {
 
     public Amount getPrice();
 
@@ -12,12 +13,7 @@ public interface Good {
 
     public String getGoodDescription();
 
-    /**
-     * Prints the {@link Good} as a formatted {@link String},
-     * that will contain the description and the price with taxes of the good
-     *
-     * @return the {@link String} representing the {@link Good}
-     */
+    @Override
     default String print() {
         return String.format("%s: %s", getGoodDescription(), getPriceWithTaxes().print());
     }

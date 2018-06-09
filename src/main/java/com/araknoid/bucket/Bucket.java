@@ -2,6 +2,7 @@ package com.araknoid.bucket;
 
 import com.araknoid.numbers.Amount;
 import com.araknoid.numbers.operations.Multiplication;
+import com.araknoid.print.Printable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,8 +11,8 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Bucket {
-    
+public class Bucket implements Printable {
+
     private final List<BucketItem> bucketList;
 
     private Bucket(List<BucketItem> bucketList) {
@@ -41,7 +42,8 @@ public class Bucket {
         return new Bucket(newBucketItemsList);
     }
 
-    public String printReceipt() {
+    @Override
+    public String print() {
         String bucketListReceipt = bucketList.stream()
                 .map(BucketItem::print)
                 .collect(Collectors.joining("\n"));

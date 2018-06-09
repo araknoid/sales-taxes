@@ -3,10 +3,11 @@ package com.araknoid.bucket;
 import com.araknoid.numbers.Amount;
 import com.araknoid.goods.Good;
 import com.araknoid.numbers.Quantity;
+import com.araknoid.print.Printable;
 
 import java.util.Objects;
 
-public class BucketItem {
+public class BucketItem implements Printable {
 
     private final Quantity quantity;
     private final Good good;
@@ -23,6 +24,7 @@ public class BucketItem {
         this.good = good;
     }
 
+    @Override
     public String print() {
         return quantity.print() + " " + good.print();
     }

@@ -5,6 +5,9 @@ import com.araknoid.numbers.Quantity;
 
 import java.util.Objects;
 
+/**
+ * Represents the multiplication between an {@link Amount} and a {@link Quantity}
+ */
 public class Multiplication {
 
     private final Amount amount;

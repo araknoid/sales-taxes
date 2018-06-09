@@ -1,8 +1,13 @@
 package com.araknoid.numbers;
 
+import com.araknoid.print.Printable;
+
 import java.math.BigDecimal;
 
-public class Quantity {
+/**
+ * Represent a positive and natural quantity
+ */
+public class Quantity implements Printable {
 
     private final int quantityValue;
 
@@ -13,19 +18,21 @@ public class Quantity {
     }
 
     /**
+     * Build an instance of a positive quantity
      *
-     * @param quantityValue
-     * @return
+     * @param quantityValue value that is represented by the {@link Quantity}
+     * @return instance of {@link Quantity}
      */
     public static Quantity of(int quantityValue) {
 
-        if(quantityValue < 0) {
+        if (quantityValue < 0) {
             throw new IllegalArgumentException("Cannot create a quantity with a negative value");
         }
 
         return new Quantity(quantityValue);
     }
 
+    @Override
     public String print() {
         return String.valueOf(quantityValue);
     }

@@ -1,11 +1,16 @@
 package com.araknoid.numbers;
 
+import com.araknoid.print.Printable;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-public class Amount {
+/**
+ * Represents a positive amount
+ */
+public class Amount implements Printable {
 
     public static final BigDecimal FIVE_CENTS = new BigDecimal("0.05");
     public static final Amount ZERO = new Amount(new BigDecimal("0.00"));
@@ -43,21 +48,6 @@ public class Amount {
         return amountValue;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Amount amount = (Amount) o;
-
-        return amountValue.equals(amount.amountValue);
-    }
-
-    @Override
-    public int hashCode() {
-        return amountValue.hashCode();
-    }
-
     /**
      * Rounds the {@link Amount} to the nearest 5 cents
      * These are the rounding applied:
@@ -78,11 +68,6 @@ public class Amount {
         return new Amount(amountValue.divide(FIVE_CENTS, 0, RoundingMode.UP).multiply(FIVE_CENTS));
     }
 
-    public String print() {
-        DecimalFormat df = new DecimalFormat("#0.00");
-        return df.format(amountValue.stripTrailingZeros());
-    }
-
     /**
      * Add the addend {@link Amount}
      * If the <code>addend</code> is <code>null</code>, it will return the same amount
@@ -97,5 +82,26 @@ public class Amount {
         }
 
         return new Amount(amountValue.add(addend.asBigDecimal()));
+    }
+
+    @Override
+    public String print() {
+        DecimalFormat df = new DecimalFormat("#0.00");
+        return df.format(amountValue.stripTrailingZeros());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Amount amount = (Amount) o;
+
+        return amountValue.equals(amount.amountValue);
+    }
+
+    @Override
+    public int hashCode() {
+        return amountValue.hashCode();
     }
 }
